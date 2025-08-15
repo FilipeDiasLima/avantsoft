@@ -1,0 +1,129 @@
+@baseUrl=http://localhost:3333
+@token={{login.response.body.token}}
+
+
+# @name hello
+GET {{baseUrl}}
+Content-Type: application/json
+
+###
+
+# @name login
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+  "email": "admin@email.com",
+  "password": "admin"
+}
+
+###
+
+# @name register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@email.com",
+  "password": "admin"
+}
+
+###
+
+# @name get_me
+GET {{baseUrl}}/auth/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name create_client
+POST {{baseUrl}}/clients
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Cliente Teste 2",
+  "email": "cliente5@teste.com",
+  "birthday": "2000-01-01"
+}
+
+###
+
+# @name get_clients
+GET {{baseUrl}}/clients?email=client
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name edit_client
+PUT {{baseUrl}}/clients/cmec2k8e10000uxhdjrv6hv0m
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Cliente Teste 11",
+  "email": "cliente1@teste.com",
+  "birthday": "2000-01-01"
+}
+
+
+###
+
+# @name create_sale
+POST {{baseUrl}}/sales
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "date": "2025-08-04",
+  "value": 12200,
+  "clientId": "cmec2kcft0001uxhd76ienps1"
+}
+
+### "clientId": "cmec2kcft0001uxhd76ienps1"
+### "clientId": "cmec2k8e10000uxhdjrv6hv0m"
+### "clientId": "cmec2fyfb0000uxea5tpn8dqz"
+
+###
+
+# @name get_sales
+GET {{baseUrl}}/sales
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 
+
+# @name delete_sales_day
+DELETE {{baseUrl}}/sales/date/2025-08-02
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_statistics
+GET {{baseUrl}}/sales/statistics?days=15
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_client_stats
+GET {{baseUrl}}/sales/client-stats
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_client_general_stats
+GET {{baseUrl}}/sales/client-stats/general
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_platform_indicators
+GET {{baseUrl}}/sales/indicators
+Content-Type: application/json
+Authorization: Bearer {{token}}
